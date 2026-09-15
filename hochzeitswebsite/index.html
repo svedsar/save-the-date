@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel & Sara - Save the Date</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #fcfcfc;
+        }
+
+        /* Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo { font-size: 22px; font-weight: bold; }
+        .logo a {
+            text-decoration: none;
+            color: inherit;
+        }
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #555;
+            font-size: 16px;
+            transition: color 0.2s ease;
+        }
+        nav a:hover {
+            color: #000;
+        }
+
+        /* Hero Section - Exakte 45% / 50% Aufteilung mit 5% Gap */
+        .hero {
+            display: grid;
+            grid-template-columns: 45% 50%;
+            gap: 5%;
+            max-width: 1200px;
+            width: 90%;
+            margin: 40px auto;
+            padding: 0;
+            scroll-margin-top: 100px;
+            align-items: center;
+        }
+        .hero-image { 
+            grid-column: 1;
+            width: 100%;
+        }
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            object-fit: cover;
+            display: block;
+        }
+        .hero-content {
+            grid-column: 2;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .sub-title { letter-spacing: 2px; font-size: 14px; color: #777; margin-bottom: 8px; }
+        h1 { font-size: 48px; margin: 8px 0; font-weight: normal; }
+        .tagline { font-size: 20px; font-style: italic; color: #555; margin-bottom: 15px; }
+        
+        .bible-ref {
+            display: block;
+            font-size: 13px;
+            font-style: normal;
+            color: #555;
+            text-align: right;
+            padding-right: 10%;
+            margin-top: 4px;
+        }
+
+        .date { font-size: 22px; font-weight: bold; margin: 12px 0; }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 15px 0;
+        }
+        .time-box { text-align: center; }
+        .number { font-size: 28px; font-weight: bold; display: block; }
+        .label { font-size: 13px; color: #666; }
+        
+        .description {
+            line-height: 1.6;
+            color: #555;
+            font-size: 18px;
+            margin: 0 auto;
+        }
+        .signature {
+            font-style: italic;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+        .short-line {
+            width: 2cm;
+            border: none;
+            height: 1px;
+            background-color: #ccc;
+            margin: 12px auto;
+        }
+
+        /* Banner-Section - Identisches Grid-Layout wie oben */
+        .intro-banner {
+            display: grid;
+            grid-template-columns: 45% 50%;
+            gap: 5%;
+            max-width: 1200px;
+            width: 90%;
+            margin: 40px auto;
+            padding: 0;
+            align-items: center;
+            background-color: #f7f7f7;
+        }
+        .intro-banner img {
+            grid-column: 1;
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            object-position: center 63%; 
+            -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+            mask-image: linear-gradient(to right, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+            display: block;
+        }
+        .intro-banner-content {
+            grid-column: 2;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .poem-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .poem-text {
+            font-style: italic;
+            line-height: 1.6;
+            color: #444;
+            font-size: 17px;
+            text-align: left;
+            transform: translateX(-30px);
+        }
+
+        /* Standardisierte Abschnitts-Überschriften */
+        .section-header {
+            text-align: center;
+            margin: 50px auto 30px;
+            scroll-margin-top: 90px;
+        }
+        .section-header .sub {
+            letter-spacing: 2px;
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+
+        /* Timeline / Galerie */
+        .timeline-gallery {
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto 50px;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+        }
+        .timeline-item {
+            flex: 1;
+            text-align: center;
+        }
+        .timeline-date {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+        .timeline-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .timeline-item h3 {
+            font-size: 20px;
+            margin: 10px 0 4px;
+            font-weight: normal;
+        }
+        .timeline-location {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+        .timeline-location a {
+            color: #666;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .timeline-location a:hover {
+            color: #111;
+        }
+        .timeline-desc {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        /* Detail-Blöcke (Măriței & Viena) */
+        .detail-block {
+            max-width: 1200px;
+            width: 90%;
+            margin: 40px auto;
+            padding: 0;
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+            scroll-margin-top: 90px;
+        }
+        .detail-block img {
+            width: 45%;
+            height: 350px;
+            object-fit: cover;
+            object-position: center 27%;
+            border-radius: 4px;
+        }
+        .detail-content {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-right: 15px;
+        }
+        .detail-text {
+            max-width: 550px;
+        }
+        .detail-text h3 {
+            font-size: 26px;
+            margin: 0 0 10px 0;
+            font-weight: normal;
+        }
+        .detail-text p {
+            line-height: 1.6;
+            color: #555;
+            font-size: 16px;
+            text-align: justify; /* Blocksatz */
+        }
+
+        /* Footer Quote */
+        .footer-quote {
+            text-align: center;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: #777;
+            margin: 60px 0 40px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation mit funktionierenden Links -->
+    <header>
+        <div class="logo"><a href="#home">D & S</a></div>
+        <nav>
+            <a href="#home">Acasă</a>
+            <a href="#povestea-noastra">Povestea noastră</a>
+            <a href="#maritei">Măriței</a>
+            <a href="#viena">Viena</a>
+        </nav>
+    </header>
+
+    <!-- Main Hero Section (Home) -->
+    <section class="hero" id="home">
+        <div class="hero-image">
+            <img src="Daniel&Sara.jpg" alt="Daniel și Sara">
+        </div>
+
+        <div class="hero-content">
+            <div class="sub-title">SAVE THE DATE</div>
+            <h1>Daniel & Sara</h1>
+            <br>
+            <div class="tagline">
+                „Apele cele mari nu pot să stingă dragostea,<br>şi râurile n-ar putea s-o înece.”
+                <span class="bible-ref">Cântarea Cântărilor 8:7</span>
+            </div>
+            <br>
+            <hr class="short-line">
+            <br>
+            <div class="date">15 august 2027</div>
+
+            <div class="countdown">
+                <div class="time-box"><span class="number" id="days">00</span><span class="label">zile</span></div>
+                <div class="time-box"><span class="number" id="hours">00</span><span class="label">ore</span></div>
+                <div class="time-box"><span class="number" id="minutes">00</span><span class="label">minute</span></div>
+                <div class="time-box"><span class="number" id="seconds">00</span><span class="label">secunde</span></div>
+            </div>
+            <br>
+            <hr class="short-line">
+            <br>
+            <p class="description">
+                Cu bucurie în suflet, vă anunțăm că ne căsătorim!<br><br>
+            </p>
+        </div>
+    </section>
+
+    <!-- Banner Bereich mit Bild 4 -->
+    <section class="intro-banner">
+        <img src="uswalkingblack&white.jpg" alt="Daniel și Sara mergând">
+        <div class="intro-banner-content">
+            <div class="poem-wrapper">
+                <div class="poem-text">
+                    La început de drum, cu mâna mea în mâna ta,<br>
+                    Pornim încet pe drumul ce Eternul ni-l va da.<br>
+                    Mergând alături, fără teamă, pas cu pas.<br>
+                    Dragostea ne e lumina și credința ni-e popas.<br><br>
+                    Ne-am logodit în taină, fără martori și inele,<br>
+                    Doar cu lumina serii și cu ropotul de stele.<br>
+                    De-acum încolo, drumurile noastre-s unul,<br>
+                    Cu Dumnezeu înainte, Unicul și Bunul!
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Povestea noastră -->
+    <div class="section-header" id="povestea-noastra">
+        <div class="sub">POVESTEA NOASTRĂ</div>
+        <hr class="short-line">
+    </div>
+
+    <!-- Timeline / 4 Bilder Galerie -->
+    <section class="timeline-gallery">
+        <div class="timeline-item">
+            <div class="timeline-date">10.05.2025</div>
+            <img src="bogenhofen.jpg" alt="Bogenhofen">
+            <h3>Dragoste la prima vedere</h3>
+            <div class="timeline-location">
+                <a href="https://www.google.com/maps/search/?api=1&query=Bogenhofen+1,+4963+St.+Peter+am+Hart" target="_blank" rel="noopener noreferrer">
+                    📍 Bogenhofen 1, 4963 St. Peter am Hart
+                </a>
+            </div>
+            <p class="timeline-desc">Drumurile noastre s-au intersectat la Bogenhofen, iar ceea ce a început ca un simplu schimb de gânduri și zâmbete a devenit repede ceva special.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-date">30.05.2025</div>
+            <img src="wien.jpg" alt="Viena">
+            <h3>Prima noastră întâlnire</h3>
+            <div class="timeline-location">
+                <a href="https://www.google.com/maps/search/?api=1&query=Volksgarten,+Vienna,+Austria" target="_blank" rel="noopener noreferrer">
+                    📍 Volksgarten, Viena
+                </a>
+            </div>
+            <p class="timeline-desc">Într-o după-amiază însorită de mai, printre trandafiri și pe fundalul muzicii de harfă, conversațiile noastre au făcut ca timpul să se oprească în loc.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-date">15.06.2025</div>
+            <img src="sonnenuntergang.jpg" alt="Apus de soare">
+            <h3>De aici, împreună</h3>
+            <div class="timeline-location">
+                <a href="https://www.google.com/maps/search/?api=1&query=Ansfelden,+Ober%C3%B6sterreich,+Austria" target="_blank" rel="noopener noreferrer">
+                    📍 Ansfelden, Oberösterreich
+                </a>
+            </div>
+            <p class="timeline-desc">În amurgul serii, pe fundalul ciripitului de păsări, el a rostit întrebarea care avea să transforme două drumuri separate într-o singură poveste: „noi”.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-date">04.04.2026</div>
+            <img src="saintodile.jpg" alt="Mont Sainte-Odile">
+            <h3>Ne-am logodit</h3>
+            <div class="timeline-location">
+                <a href="https://www.google.com/maps/search/?api=1&query=Sanctuaire+du+Mont+Sainte+Odile,+Ottrott,+France" target="_blank" rel="noopener noreferrer">
+                    📍 Sanctuaire du Mont Sainte Odile, Franța
+                </a>
+            </div>
+            <p class="timeline-desc">Înconjurați de liniște, frumusețe și creația lui Dumnezeu, am spus «da» unui viitor împreună.</p>
+        </div>
+    </section>
+
+    <!-- Section: Măriței -->
+    <section class="detail-block" id="maritei">
+        <img src="bisericaadventista.jpg" alt="Biserica Adventista Măriței">
+        <div class="detail-content">
+            <div class="detail-text">
+                <div class="sub-title" style="text-align: left;">LOCUL ÎN CARE NE VOM SPUNE «DA»</div>
+                <h3>Măriței, Suceava</h3>
+                <p>Cununia religioasă va avea loc la Biserica Adventistă de Ziua a Șaptea din Măriței, biserica în care Sara a copilărit. Pentru ea, este un adevărat popas de suflet, locul în care a visat mereu să pășească spre altar.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Viena -->
+    <section class="detail-block" id="viena">
+        <img src="hofburg.jpg" alt="Hofburg Viena">
+        <div class="detail-content">
+            <div class="detail-text">
+                <div class="sub-title" style="text-align: left;">CE URMEAZĂ</div>
+                <h3>Un cămin la Viena</h3>
+                <p>După nuntă, plănuim să ne mutăm la Viena, orașul în care Daniel s-a născut și a crescut și unde vom începe un nou capitol al vieții noastre. Privim cu recunoștință spre tot ce am trăit până aici și cu încredere spre drumul care ne stă înainte, știind că Dumnezeu va fi alături de noi la fiecare pas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Quote -->
+    <div class="footer-quote">
+        <hr class="short-line">
+        DOUĂ INIMI. UN DRUM. CU DUMNEZEU ÎNAINTE.
+    </div>
+
+<script>
+    const targetDate = new Date("August 15, 2027 00:00:00").getTime();
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const difference = targetDate - now;
+
+        if (difference > 0) {
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+        } else {
+            document.querySelector(".countdown").innerHTML = "<h3>Ziua cea mare a sosit!</h3>";
+        }
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
